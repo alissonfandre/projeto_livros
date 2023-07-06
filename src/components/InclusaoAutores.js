@@ -3,28 +3,33 @@
 import { useForm } from "react-hook-form";
 import { api } from "../config_axios";
 import { useState } from "react";
-//register serve para definir os nomes dos campos do form (validações)
-//handleSubmit, para indicar o método a ser acionado no evento onSubmit do form
-//form onSubmit={handleSubmit(salvar)}
+
 const InclusaoAutores = () => {
     const { register, handleSubmit } = useForm();
     const [aviso, setAviso] = useState("");
     //método chamado ao enviar form onSubmit
     const salvar = async (campos) => {
         try {
-            const response = await api.post("autor", campos);
+            const response = await api.post("autores", campos);
             setAviso("Autor cadastrado com sucesso!")
         } catch (error) {
             setAviso("Erro ao cadastrar Autor!");
         }
 
 
-        //JSON.stringify() converte um objeto javascript para uma String JSON 
-        //alert(JSON.stringify(campos));
-        //lá no html puro usavamos titulo.value para pegar valor
+   
     }
-    //aqui é o que vai ser exibido em tela
+
+    function handelePhone(event) {
+        const input = event.target;
+        let phoneNumber = input.value.replace(/\D/g, "");
+        phoneNumber = phoneNumber.replace(/^(\d{2})(\d{4,5})(\d{4})/, "($1) $2-$3");
+        input.value = phoneNumber;
+    }
+    
     //nome, sobrenome, idade, data_nascimento, sexo, telefone
+
+
     return (
         <div className="container">
             <h4 className="fst-italic mt-3">Autores</h4>
@@ -72,8 +77,8 @@ const InclusaoAutores = () => {
                     <div className="col-sm-4">
                         <div className="form-group">
                             <label htmlFor="telefone">Telefone</label>
-                            <input type="number" className="form-control"
-                                id="telefone" required {...register("telefone")}></input>
+                            <input type="tel" className="form-control" id="telefone" maxLength="15"
+                                onKeyUp={handelePhone} required autoFocus {...register("telefone")}/>
                         </div>
                     </div>
                 </div>

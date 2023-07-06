@@ -12,10 +12,10 @@ const InclusaoEditoras = () => {
     //método chamado ao enviar form onSubmit
     const salvar = async (campos) => {
         try {
-            const response = await api.post("editor", campos);
-            setAviso("Autor cadastrado com sucesso!")
+            const response = await api.post("editoras", campos);
+            setAviso("editora cadastrado com sucesso!")
         } catch (error) {
-            setAviso("Erro ao cadastrar Autor!");
+            setAviso("Erro ao cadastrar a Editora!");
         }
 
 
@@ -73,7 +73,7 @@ const InclusaoEditoras = () => {
                         <div className="form-group">
                             <label htmlFor="cep">CEP</label>
                             <input type="text" className="form-control"
-                                id="cep" required {...register("sexo")}></input>
+                                id="cep" required {...register("cep")}></input>
                         </div>
                     </div>
                 </div>
